@@ -1,0 +1,33 @@
+{% load static %}
+{% load user_filters %}
+<nav class="navbar navbar-expand-md navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" style="font-size: 25px;" href="{% url 'index:index' %}">
+      <img src="{% static 'img/logo.png' %}" width="32" height="32" class="d-inline-block align-top" alt="">
+      «ШТРИХ-КОД» <font class="align-top" size="2">v 1.0</font>
+    </a>
+    <div class="collapse navbar-collapse mr-auto" id="navbarText">
+      {% with request.get_full_path as path %}
+        <ul class="navbar-nav ms-auto mb-2 mb-md-0 text-center">
+          <li class="nav-item">
+            <a class="nav-link {% if path == "/" or path|startswith:"/?o=" %}active{% endif %}" aria-current="page" href="{% url 'index:index' %}">
+              ПРОСМОТР
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">
+              ОТЧЁТЫ
+            </a>
+          </li>
+      {% endwith %}
+          <li class="nav-item">
+            <a class="help-icon" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <img src="{% static 'img/help-button.png' %}" class="mt-1" alt="Поддержка" width="35" height="35">
+            </a>
+          </li>
+        </ul>
+    </div>
+  </div>
+</nav>
+
+{% include 'includes/modal_help.html' %}

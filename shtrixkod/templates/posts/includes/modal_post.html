@@ -1,0 +1,53 @@
+<!-- Модальное окно -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-style">
+            <div class="modal-header">
+                <h4 class="modal-title aqum-font" id="exampleModalLabel">Добавление записи</h4>
+            </div>
+            <div class="modal-body">
+                {% include 'includes/form.html' %}
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-outline-secondary aqum-font" data-bs-dismiss="modal">Закрыть</button>
+                <button type="submit" class="btn btn-primary btn-style" href="{% url 'index:record_create' %}">Добавить</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% comment %} 
+{% extends 'base.html' %}
+{% block title %}
+  {% if is_edit %} 
+    Редактирование записи 
+  {% else %} 
+    Новая запись 
+  {% endif %}
+{% endblock %}
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-md-8 p-5">
+      <div class="card">
+        <div class="card-header">
+          {% if is_edit %} 
+            Редактирование записи 
+          {% else %} 
+            Добавление записи 
+          {% endif %}
+        </div>
+        <div class="card-body">
+          {% include 'includes/form.html' %}
+          <div class="col-md-6 offset-md-4">
+            <button type="submit" class="btn btn-outline-dark">
+              {% if is_edit %}
+                Сохранить
+              {% else %}
+                Добавить
+              {% endif %} 
+            </button>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+{% endblock %} {% endcomment %}
