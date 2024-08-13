@@ -22,58 +22,78 @@
                     {% endif %}
                 </th>
                 <th scope="col">
-                    <a class="link-light" href="?o={% if '-add_date' in querydict.o %}add_date,{{ querydict.o|checkoption:"-add_date" }}{% else %}-add_date,{{ querydict.o|checkoption:"add_date" }}{% endif %}">
-                        Дата приёма
-                    </a> 
+                  <a class="link-light" href="?o={% if '-marking' in querydict.o %}marking,{{ querydict.o|checkoption:"-marking" }}{% else %}-marking,{{ querydict.o|checkoption:"marking" }}{% endif %}">
+                       Маркировка
+                  </a> 
 
-                    {% if '-add_date' in querydict.o %}
-                    ▼
-                    {% elif 'add_date' in querydict.o %}
-                    ▲
-                    {% endif %}
-                    
-                    {% if '-add_date' in querydict.o or 'add_date' in querydict.o %}
-                      <a class="link-light" style="text-decoration: none;" href="?o={% if '-add_date' in querydict.o %}{{ querydict.o|checkoption:"-add_date" }}{% else %}{{ querydict.o|checkoption:"add_date" }}{% endif %}">
-                        <small>  —</small>
-                      </a>
-                    {% endif %}
-                </th>
-                <th scope="col">
-                    <a class="link-light" href="?o={% if '-storage_date' in querydict.o %}storage_date,{{ querydict.o|checkoption:"-storage_date" }}{% else %}-storage_date,{{ querydict.o|checkoption:"storage_date" }}{% endif %}">
-                        Окончание хранения
+                  {% if '-marking' in querydict.o %}
+                  ▼
+                  {% elif 'marking' in querydict.o %}
+                  ▲
+                  {% endif %}
+                  
+                  {% if '-marking' in querydict.o or 'marking' in querydict.o %}
+                    <a class="link-light" style="text-decoration: none;" href="?o={% if '-marking' in querydict.o %}{{ querydict.o|checkoption:"-marking" }}{% else %}{{ querydict.o|checkoption:"marking" }}{% endif %}">
+                      <small>  —</small>
                     </a>
+                  {% endif %}
+              </th>
+              <th>Количество мест</th>
+              <th>Вес</th>
+              <th>Объем</th>
+              <th scope="col">
+                  <a class="link-light" href="?o={% if '-add_date' in querydict.o %}add_date,{{ querydict.o|checkoption:"-add_date" }}{% else %}-add_date,{{ querydict.o|checkoption:"add_date" }}{% endif %}">
+                      Дата приёма
+                  </a> 
 
-                    {% if '-storage_date' in querydict.o %}
-                    ▼
-                    {% elif 'storage_date' in querydict.o %}
-                    ▲
-                    {% endif %}
-                    
-                    {% if '-storage_date' in querydict.o or 'storage_date' in querydict.o %}
-                      <a class="link-light" style="text-decoration: none;" href="?o={% if '-storage_date' in querydict.o %}{{ querydict.o|checkoption:"-storage_date" }}{% else %}{{ querydict.o|checkoption:"storage_date" }}{% endif %}">
-                        <small>  —</small>
-                      </a>
-                    {% endif %}
-                </th>
-                <th scope="col">
-                    <a class="link-light" href="?o={% if '-recipient' in querydict.o %}recipient,{{ querydict.o|checkoption:"-recipient" }}{% else %}-recipient,{{ querydict.o|checkoption:"recipient" }}{% endif %}">
-                        Заказчик
+                  {% if '-add_date' in querydict.o %}
+                  ▼
+                  {% elif 'add_date' in querydict.o %}
+                  ▲
+                  {% endif %}
+                  
+                  {% if '-add_date' in querydict.o or 'add_date' in querydict.o %}
+                    <a class="link-light" style="text-decoration: none;" href="?o={% if '-add_date' in querydict.o %}{{ querydict.o|checkoption:"-add_date" }}{% else %}{{ querydict.o|checkoption:"add_date" }}{% endif %}">
+                      <small>  —</small>
                     </a>
+                  {% endif %}
+              </th>
+              <th scope="col">
+                  <a class="link-light" href="?o={% if '-storage_date' in querydict.o %}storage_date,{{ querydict.o|checkoption:"-storage_date" }}{% else %}-storage_date,{{ querydict.o|checkoption:"storage_date" }}{% endif %}">
+                      Платное хранение с
+                  </a>
 
-                    {% if '-recipient' in querydict.o %}
-                    ▼
-                    {% elif 'recipient' in querydict.o %}
-                    ▲
-                    {% endif %}
-                    
-                    {% if '-recipient' in querydict.o or 'recipient' in querydict.o %}
-                      <a class="link-light" style="text-decoration: none;" href="?o={% if '-recipient' in querydict.o %}{{ querydict.o|checkoption:"-recipient" }}{% else %}{{ querydict.o|checkoption:"recipient" }}{% endif %}">
-                        <small>  —</small>
-                      </a>
-                    {% endif %}
-                </th>
-                <th scope="col">Комментарий</th>
-                <th scope="col">🛠</th>
+                  {% if '-storage_date' in querydict.o %}
+                  ▼
+                  {% elif 'storage_date' in querydict.o %}
+                  ▲
+                  {% endif %}
+                  
+                  {% if '-storage_date' in querydict.o or 'storage_date' in querydict.o %}
+                    <a class="link-light" style="text-decoration: none;" href="?o={% if '-storage_date' in querydict.o %}{{ querydict.o|checkoption:"-storage_date" }}{% else %}{{ querydict.o|checkoption:"storage_date" }}{% endif %}">
+                      <small>  —</small>
+                    </a>
+                  {% endif %}
+              </th>
+              <th scope="col">
+                  <a class="link-light" href="?o={% if '-recipient' in querydict.o %}recipient,{{ querydict.o|checkoption:"-recipient" }}{% else %}-recipient,{{ querydict.o|checkoption:"recipient" }}{% endif %}">
+                      Заказчик
+                  </a>
+
+                  {% if '-recipient' in querydict.o %}
+                  ▼
+                  {% elif 'recipient' in querydict.o %}
+                  ▲
+                  {% endif %}
+                  
+                  {% if '-recipient' in querydict.o or 'recipient' in querydict.o %}
+                    <a class="link-light" style="text-decoration: none;" href="?o={% if '-recipient' in querydict.o %}{{ querydict.o|checkoption:"-recipient" }}{% else %}{{ querydict.o|checkoption:"recipient" }}{% endif %}">
+                      <small>  —</small>
+                    </a>
+                  {% endif %}
+              </th>
+              <th scope="col">Комментарий</th>
+              <th scope="col">🛠</th>
             </tr>
         </thead>
 
@@ -82,6 +102,10 @@
                 <tr>
                     {% comment %} <td><b>{{ record.pk }}</b></td> {% endcomment %}
                     <td>{{ record.name }}</td>
+                    <td>{{ record.marking  }}</td>
+                    <td>{{ record.amount  }} <small class="text-secondary">шт.</small></td>
+                    <td>{{ record.weight  }} <small class="text-secondary">кг.</small></td>
+                    <td>{{ record.volume  }} <small class="text-secondary">м³</small></td>
                     <td>{{ record.add_date|date:"d.m.Y"  }}</td>
                     <td style="color: {{ record.storage_date|date:"d.m.Y"|checkdate }};">{{ record.storage_date|date:"d.m.Y" }}</td>
                     <td>{{ record.recipient }}</td>

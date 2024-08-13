@@ -12,6 +12,27 @@ class Record(models.Model):
         help_text="Введите наименование",
         max_length=150
     )
+    marking = models.CharField(
+        blank=False,
+        verbose_name="Маркировка",
+        help_text="Введите маркировку",
+        max_length=30
+    )
+    amount = models.IntegerField(
+        blank=False,
+        verbose_name="Количество мест",
+        help_text="Введите количество мест"
+    )
+    weight = models.IntegerField(
+        blank=False,
+        verbose_name="Вес",
+        help_text="Введите вес в килограммах"
+    )
+    volume = models.IntegerField(
+        blank=False,
+        verbose_name="Объем",
+        help_text="Введите объем в м³"
+    )
     add_date = models.DateField(
         blank=False,
         auto_now_add=False,

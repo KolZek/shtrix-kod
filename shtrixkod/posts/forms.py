@@ -10,9 +10,20 @@ class DateInput(forms.DateInput):
 class RecordForm(forms.ModelForm):
     class Meta:
         model = Record
-        fields = ("name", "add_date", "storage_date", "recipient", "comment")
+        fields = (
+            "name",
+            "marking",
+            "amount",
+            "weight",
+            "volume",
+            "add_date",
+            "storage_date",
+            "recipient",
+            "comment"
+        )
         widgets = {
             "name": forms.Textarea(attrs={'rows':3,}),
+            "marking": forms.Textarea(attrs={'rows':1,}),
             "add_date": DateInput(
                 format=('%Y-%m-%d'),
                 attrs={
