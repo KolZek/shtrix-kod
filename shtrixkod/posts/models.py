@@ -23,12 +23,12 @@ class Record(models.Model):
         verbose_name="Количество мест",
         help_text="Введите количество мест"
     )
-    weight = models.IntegerField(
+    weight = models.FloatField(
         blank=False,
         verbose_name="Вес",
         help_text="Введите вес в килограммах"
     )
-    volume = models.IntegerField(
+    volume = models.FloatField(
         blank=False,
         verbose_name="Объем",
         help_text="Введите объем в м³"
@@ -38,10 +38,10 @@ class Record(models.Model):
         auto_now_add=False,
         verbose_name="Дата поступления на склад"
     )
-    storage_date = models.DateField(
-        blank=False,
+    issue_date = models.DateField(
+        blank=True, null=True,
         auto_now_add=False,
-        verbose_name="Дата хранения до"
+        verbose_name="Дата выдачи"
     )
     recipient = models.TextField(
         blank=False,
@@ -59,7 +59,7 @@ class Record(models.Model):
     class Meta:
         verbose_name_plural = "Записи"
         verbose_name = "Запись"
-        ordering = ["add_date"]
+        ordering = ["issue_date", "-add_date"]
 
     def __str__(self):
         name = self.name

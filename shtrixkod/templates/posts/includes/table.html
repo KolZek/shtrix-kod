@@ -1,5 +1,5 @@
 {% load user_filters %}
-<div class="table-responsive table-scroll" style="overflow: auto; height: 550px !important;">
+<div class="table-responsive table-scroll" style="overflow: auto; height: 625px !important;">
     <table class="table table-bordered table-striped">
         <thead>
             <tr class="text-center">
@@ -38,9 +38,57 @@
                     </a>
                   {% endif %}
               </th>
-              <th>Количество мест</th>
-              <th>Вес</th>
-              <th>Объем</th>
+              <th>
+                <a class="link-light" href="?o={% if '-amount' in querydict.o %}amount,{{ querydict.o|checkoption:"-amount" }}{% else %}-amount,{{ querydict.o|checkoption:"amount" }}{% endif %}">
+                  Количество
+                </a> 
+
+                {% if '-amount' in querydict.o %}
+                ▼
+                {% elif 'amount' in querydict.o %}
+                ▲
+                {% endif %}
+                
+                {% if '-amount' in querydict.o or 'amount' in querydict.o %}
+                  <a class="link-light" style="text-decoration: none;" href="?o={% if '-amount' in querydict.o %}{{ querydict.o|checkoption:"-amount" }}{% else %}{{ querydict.o|checkoption:"amount" }}{% endif %}">
+                    <small>  —</small>
+                  </a>
+                {% endif %}
+              </th>
+              <th>
+                <a class="link-light" href="?o={% if '-weight' in querydict.o %}weight,{{ querydict.o|checkoption:"-weight" }}{% else %}-weight,{{ querydict.o|checkoption:"weight" }}{% endif %}">
+                  Вес
+                </a> 
+
+                {% if '-weight' in querydict.o %}
+                ▼
+                {% elif 'weight' in querydict.o %}
+                ▲
+                {% endif %}
+                
+                {% if '-weight' in querydict.o or 'weight' in querydict.o %}
+                  <a class="link-light" style="text-decoration: none;" href="?o={% if '-weight' in querydict.o %}{{ querydict.o|checkoption:"-weight" }}{% else %}{{ querydict.o|checkoption:"weight" }}{% endif %}">
+                    <small>  —</small>
+                  </a>
+                {% endif %}
+              </th>
+              <th>
+                <a class="link-light" href="?o={% if '-volume' in querydict.o %}volume,{{ querydict.o|checkoption:"-volume" }}{% else %}-volume,{{ querydict.o|checkoption:"volume" }}{% endif %}">
+                  Объем
+                </a> 
+
+                {% if '-volume' in querydict.o %}
+                ▼
+                {% elif 'volume' in querydict.o %}
+                ▲
+                {% endif %}
+                
+                {% if '-volume' in querydict.o or 'volume' in querydict.o %}
+                  <a class="link-light" style="text-decoration: none;" href="?o={% if '-volume' in querydict.o %}{{ querydict.o|checkoption:"-volume" }}{% else %}{{ querydict.o|checkoption:"volume" }}{% endif %}">
+                    <small>  —</small>
+                  </a>
+                {% endif %}
+              </th>
               <th scope="col">
                   <a class="link-light" href="?o={% if '-add_date' in querydict.o %}add_date,{{ querydict.o|checkoption:"-add_date" }}{% else %}-add_date,{{ querydict.o|checkoption:"add_date" }}{% endif %}">
                       Дата приёма
@@ -58,40 +106,25 @@
                     </a>
                   {% endif %}
               </th>
+              <th scope="col">Платное хранение с</th>
               <th scope="col">
-                  <a class="link-light" href="?o={% if '-storage_date' in querydict.o %}storage_date,{{ querydict.o|checkoption:"-storage_date" }}{% else %}-storage_date,{{ querydict.o|checkoption:"storage_date" }}{% endif %}">
-                      Платное хранение с
-                  </a>
+                <a class="link-light" href="?o={% if '-issue_date' in querydict.o %}issue_date,{{ querydict.o|checkoption:"-issue_date" }}{% else %}-issue_date,{{ querydict.o|checkoption:"issue_date" }}{% endif %}">
+                  Дата выдачи
+                </a> 
 
-                  {% if '-storage_date' in querydict.o %}
-                  ▼
-                  {% elif 'storage_date' in querydict.o %}
-                  ▲
-                  {% endif %}
-                  
-                  {% if '-storage_date' in querydict.o or 'storage_date' in querydict.o %}
-                    <a class="link-light" style="text-decoration: none;" href="?o={% if '-storage_date' in querydict.o %}{{ querydict.o|checkoption:"-storage_date" }}{% else %}{{ querydict.o|checkoption:"storage_date" }}{% endif %}">
-                      <small>  —</small>
-                    </a>
-                  {% endif %}
-              </th>
-              <th scope="col">
-                  <a class="link-light" href="?o={% if '-recipient' in querydict.o %}recipient,{{ querydict.o|checkoption:"-recipient" }}{% else %}-recipient,{{ querydict.o|checkoption:"recipient" }}{% endif %}">
-                      Заказчик
+                {% if '-issue_date' in querydict.o %}
+                ▼
+                {% elif 'issue_date' in querydict.o %}
+                ▲
+                {% endif %}
+                
+                {% if '-issue_date' in querydict.o or 'issue_date' in querydict.o %}
+                  <a class="link-light" style="text-decoration: none;" href="?o={% if '-issue_date' in querydict.o %}{{ querydict.o|checkoption:"-issue_date" }}{% else %}{{ querydict.o|checkoption:"issue_date" }}{% endif %}">
+                    <small>  —</small>
                   </a>
-
-                  {% if '-recipient' in querydict.o %}
-                  ▼
-                  {% elif 'recipient' in querydict.o %}
-                  ▲
-                  {% endif %}
-                  
-                  {% if '-recipient' in querydict.o or 'recipient' in querydict.o %}
-                    <a class="link-light" style="text-decoration: none;" href="?o={% if '-recipient' in querydict.o %}{{ querydict.o|checkoption:"-recipient" }}{% else %}{{ querydict.o|checkoption:"recipient" }}{% endif %}">
-                      <small>  —</small>
-                    </a>
-                  {% endif %}
+                {% endif %}
               </th>
+              <th scope="col">Заказчик</th>
               <th scope="col">Комментарий</th>
               <th scope="col">🛠</th>
             </tr>
@@ -102,12 +135,30 @@
                 <tr>
                     {% comment %} <td><b>{{ record.pk }}</b></td> {% endcomment %}
                     <td>{{ record.name }}</td>
-                    <td>{{ record.marking  }}</td>
-                    <td>{{ record.amount  }} <small class="text-secondary">шт.</small></td>
-                    <td>{{ record.weight  }} <small class="text-secondary">кг.</small></td>
-                    <td>{{ record.volume  }} <small class="text-secondary">м³</small></td>
-                    <td>{{ record.add_date|date:"d.m.Y"  }}</td>
-                    <td style="color: {{ record.storage_date|date:"d.m.Y"|checkdate }};">{{ record.storage_date|date:"d.m.Y" }}</td>
+                    <td class="one-string">{{ record.marking  }}</td>
+                    <td class="one-string">{{ record.amount  }} <small class="text-secondary">шт.</small></td>
+                    <td class="one-string">{{ record.weight  }} <small class="text-secondary">кг.</small></td>
+                    <td class="one-string">{{ record.volume  }} <small class="text-secondary">м³</small></td>
+                    <td class="one-string">{{ record.add_date|date:"d.m.Y"  }}</td>
+                    <td style="color: {{ record.add_date|paidstorage|checkdate:record.issue_date }};">
+                      {{ record.add_date|paidstorage|date:"d.m.Y" }}
+                      <small class="text-secondary">
+                        {% if record.add_date|paidstoragesum %}
+                          {{ record.volume|getpaidstoragesum:record.add_date }} руб.
+                        {% else %}
+                          0 руб.
+                        {% endif %}
+                      </small>
+                    </td>
+                    <td>
+                      {% if record.issue_date %}
+                        <span class="text-primary">{{ record.issue_date|date:"d.m.Y" }}</span>
+                      {% else %}
+                          <a class="link-secondary" href="{% url 'posts:record_add_issue' record.pk %}">
+                            Не выдан  ✎
+                          </a>
+                      {% endif %}
+                    </td>
                     <td>{{ record.recipient }}</td>
                     <td>
                         {% if not record.comment %}
@@ -126,3 +177,5 @@
         </tbody>
     </table>
 </div>
+
+{% include 'posts/includes/modal_post.html' %}

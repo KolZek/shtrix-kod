@@ -1,8 +1,9 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Q
 
 from .models import Record
-from .forms import RecordForm
+from .forms import RecordForm, RecordFormIssueDate
 
 
 def index(request):
@@ -11,13 +12,13 @@ def index(request):
 
     options_data = request.GET
 
-    record_list = None
-    if options_data:
+    record_list = Record.objects.exclude(~Q(issue_date=None))
+    if "f" in options_data.keys() and options_data["f"] != "":
+        record_list = Record.objects.all()
+    if "o" in options_data.keys() and options_data["o"] != "":
         options = options_data["o"].split(",")
         options = [x for x in options if x != ""]
-        record_list = Record.objects.order_by(*options).all()
-    else:
-        record_list = Record.objects.all()
+        record_list = record_list.order_by(*options).all()
 
     page_obj = paginator(request, record_list)
     context = {
@@ -44,6 +45,27 @@ def record_create(request):
             record = form.save(commit=False)
             record.save()
             request.session["is_info_message"] = "Запись успешно создана"
+            return redirect("index:index")
+        return render(request, template, context)
+    return render(request, template, context)
+
+
+def record_add_issue_date(request, record_id):
+    """Страница добавления даты выдачи."""
+    record = get_object_or_404(Record, id=record_id)
+    template = "posts/create_post.html"
+    form = RecordFormIssueDate(files=request.FILES or None, instance=record)
+    context = {
+        "form": form,
+        "is_add_issue": True
+    }
+    if request.method == "POST":
+        form = RecordFormIssueDate(
+            request.POST or None, files=request.FILES or None, instance=record
+        )
+        if form.is_valid():
+            record.save()
+            request.session["is_info_message"] = "Дата выдачи успешно добавлена"
             return redirect("index:index")
         return render(request, template, context)
     return render(request, template, context)

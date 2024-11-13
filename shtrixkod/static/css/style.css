@@ -12,6 +12,14 @@ header nav {
     font-size: 20px;
 }
 
+.one-string {
+    white-space: nowrap;
+}
+
+.container{
+    max-width: 1550px;
+}
+
 .bg-style {
     background-color:  #3759A0;
 }
@@ -72,6 +80,7 @@ table tr td, table tr th {
 table thead tr th {
     background-color: #3759A0 !important;
     color: white !important;
+    white-space: nowrap;
 }
 
 .table-scroll::-webkit-scrollbar {
@@ -112,3 +121,4 @@ table thead tr th {
     opacity: 70%;
     cursor: pointer;
 }
+

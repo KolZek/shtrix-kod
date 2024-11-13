@@ -1,3 +1,4 @@
+import re
 import datetime as dt
 
 from django import template
@@ -11,17 +12,48 @@ def addclass(field, css):
 
 
 @register.filter
-def checkdate(date):
+def checkdate(date, is_issue_date):
     date_now = dt.date.today()
-    conv_dt = dt.datetime.strptime(date, "%d.%m.%Y").date()
 
-    if conv_dt == date_now:
+    if is_issue_date:
+        return "#0d6efd"
+    elif date == date_now:
         return "#ffaa00"
-    elif conv_dt > date_now:
+    elif date > date_now:
         return "green"
     else:
         return "red"
-    
+
+
+@register.filter
+def paidstorage(date):
+    paid_storage = date + dt.timedelta(days=3)
+    return paid_storage
+
+
+@register.filter
+def paidstoragesum(date):
+    paid_storage_date = paidstorage(date)
+    date_now = dt.date.today()
+
+    if date_now >= paid_storage_date:
+        return True
+    return False
+
+
+@register.filter
+def getpaidstoragesum(volume, date):
+    paid_storage = paidstorage(date)
+    date_now = dt.date.today()
+
+    date_difference = date_now - paid_storage
+    days_coeff = 1 if date_difference.days == 0 else date_difference.days
+
+    result_sum = int(volume*(350*days_coeff))
+    result_sum = re.sub(r"(?<!^)(?=(\d{3})+$)", ".", str(result_sum))
+
+    return result_sum
+
 
 @register.filter
 def checkoption(querydict, option):

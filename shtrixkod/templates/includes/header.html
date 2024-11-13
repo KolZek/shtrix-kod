@@ -10,7 +10,7 @@
       {% with request.get_full_path as path %}
         <ul class="navbar-nav ms-auto mb-2 mb-md-0 text-center">
           <li class="nav-item">
-            <a class="nav-link {% if path == "/" or path|startswith:"/?o=" %}active{% endif %}" aria-current="page" href="{% url 'index:index' %}">
+            <a class="nav-link {% if path == "/" or path|startswith:"/?o=" or path|startswith:"/?f=" %}active{% endif %}" aria-current="page" href="{% url 'index:index' %}">
               ПРОСМОТР
             </a>
           </li>

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load user_filters %}
 {% block title %}
  СУС «Штрих-код»
 {% endblock %}
@@ -12,6 +13,10 @@
       </a>
       <a type="button" class="btn btn-style btn-primary" href="{% url 'posts:index' %}">Обновить таблицу</a>
     </div>
+    <div class="col d-flex flex-row-reverse">
+      {% comment %} <a type="button" class="btn btn-style btn-primary" href="{% url 'posts:index' %}">Обновить таблицу</a> {% endcomment %}
+      <a class="btn btn-outline-primary {% if 'issue_date' in querydict.f %}active{% endif %}"  href="?f={% if 'issue_date' in querydict.f %}{{ querydict.f|checkoption:"issue_date" }}{% else %}issue_date{% endif %}">Отображать выданные позиции</a>
+    </div>
   </div>
 
   <br>
@@ -21,7 +26,8 @@
         <font size="2">
           <span style="color: red;">*Красный - дата просрочена</span> |
           <span style="color: #ffaa00;">*Желтый - дата истекает</span> |
-          <span style="color: green;">*Зеленый - дата актуальна</span>
+          <span style="color: green;">*Зеленый - дата актуальна</span> |
+          <span style="color: #0d6efd;">*Синий - выдан со склада</span>
         </font>
       </i>
   </div>
